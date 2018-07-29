@@ -1,0 +1,955 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="frtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="FinancialKPIsMonth">
+          <Key>
+            <PropertyRef Name="KPIMonth" />
+            <PropertyRef Name="PersonCode" />
+          </Key>
+          <Property Name="KPIMonth" Type="datetime" Nullable="false" />
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="TimesheetDollars" Type="money" />
+          <Property Name="TimesheetDollarsBudget" Type="money" />
+          <Property Name="InvoiceDollars" Type="money" />
+          <Property Name="InvoiceDollarsBudget" Type="money" />
+          <Property Name="WriteOffDollars" Type="money" />
+          <Property Name="WriteOffDollarsBudget" Type="money" />
+          <Property Name="WIPDollars" Type="money" />
+          <Property Name="WIPDollarsBudget" Type="money" />
+        </EntityType>
+        <EntityType Name="FinancialKPIsWeek">
+          <Key>
+            <PropertyRef Name="KPIWeek" />
+            <PropertyRef Name="PersonCode" />
+          </Key>
+          <Property Name="KPIWeek" Type="datetime" Nullable="false" />
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="TimesheetDollars" Type="money" />
+          <Property Name="TimesheetDollarsBudget" Type="money" />
+        </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="LeaveId" />
+          </Key>
+          <Property Name="LeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Caption" Type="nchar" MaxLength="255" />
+          <Property Name="DateFrom" Type="datetime" Nullable="false" />
+          <Property Name="DateTo" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Links">
+          <Key>
+            <PropertyRef Name="LinkID" />
+          </Key>
+          <Property Name="LinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="250" />
+          <Property Name="URL" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Months">
+          <Key>
+            <PropertyRef Name="MonthCommencing" />
+          </Key>
+          <Property Name="MonthCommencing" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="PersonCode" />
+          </Key>
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hidden" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PromiseCategories">
+          <Key>
+            <PropertyRef Name="PromiseCategory" />
+          </Key>
+          <Property Name="PromiseCategory" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Promises">
+          <Key>
+            <PropertyRef Name="PromiseID" />
+          </Key>
+          <Property Name="PromiseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="PromiseWeek" Type="datetime" Nullable="false" />
+          <Property Name="PromiseCategory" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="PromiseDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="PromiseComplete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReferralDivisions">
+          <Key>
+            <PropertyRef Name="Division" />
+          </Key>
+          <Property Name="Division" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ReferralKPIs">
+          <Key>
+            <PropertyRef Name="PersonCode" />
+            <PropertyRef Name="Division" />
+          </Key>
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Division" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ReferralDollars" Type="money" />
+          <Property Name="ReferralDollarsBudget" Type="money" />
+        </EntityType>
+        <EntityType Name="TrainingGoals">
+          <Key>
+            <PropertyRef Name="GoalID" />
+          </Key>
+          <Property Name="GoalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Goal" Type="nvarchar" MaxLength="250" />
+          <Property Name="URL" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Weeks">
+          <Key>
+            <PropertyRef Name="WeekCommencing" />
+          </Key>
+          <Property Name="WeekCommencing" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="XPMJobs">
+          <Key>
+            <PropertyRef Name="XpmJobId" />
+          </Key>
+          <Property Name="XpmJobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Caption" Type="nchar" MaxLength="255" />
+          <Property Name="URL" Type="nchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_FinancialKPIsMonth_Months">
+          <End Role="Months" Type="Self.Months" Multiplicity="1" />
+          <End Role="FinancialKPIsMonth" Type="Self.FinancialKPIsMonth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Months">
+              <PropertyRef Name="MonthCommencing" />
+            </Principal>
+            <Dependent Role="FinancialKPIsMonth">
+              <PropertyRef Name="KPIMonth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinancialKPIsMonth_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="FinancialKPIsMonth" Type="Self.FinancialKPIsMonth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="FinancialKPIsMonth">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinancialKPIsWeek_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="FinancialKPIsWeek" Type="Self.FinancialKPIsWeek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="FinancialKPIsWeek">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinancialKPIsWeek_Weeks">
+          <End Role="Weeks" Type="Self.Weeks" Multiplicity="1" />
+          <End Role="FinancialKPIsWeek" Type="Self.FinancialKPIsWeek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weeks">
+              <PropertyRef Name="WeekCommencing" />
+            </Principal>
+            <Dependent Role="FinancialKPIsWeek">
+              <PropertyRef Name="KPIWeek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leave_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Leave" Type="Self.Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="Leave">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Links_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Links" Type="Self.Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="Links">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promises_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Promises" Type="Self.Promises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="Promises">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promises_PromiseCategories">
+          <End Role="PromiseCategories" Type="Self.PromiseCategories" Multiplicity="1" />
+          <End Role="Promises" Type="Self.Promises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromiseCategories">
+              <PropertyRef Name="PromiseCategory" />
+            </Principal>
+            <Dependent Role="Promises">
+              <PropertyRef Name="PromiseCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promises_Weeks">
+          <End Role="Weeks" Type="Self.Weeks" Multiplicity="1" />
+          <End Role="Promises" Type="Self.Promises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weeks">
+              <PropertyRef Name="WeekCommencing" />
+            </Principal>
+            <Dependent Role="Promises">
+              <PropertyRef Name="PromiseWeek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferralKPIs_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="ReferralKPIs" Type="Self.ReferralKPIs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="ReferralKPIs">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferralKPIs_ReferralDivisions">
+          <End Role="ReferralDivisions" Type="Self.ReferralDivisions" Multiplicity="1" />
+          <End Role="ReferralKPIs" Type="Self.ReferralKPIs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferralDivisions">
+              <PropertyRef Name="Division" />
+            </Principal>
+            <Dependent Role="ReferralKPIs">
+              <PropertyRef Name="Division" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrainingGoals_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="TrainingGoals" Type="Self.TrainingGoals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="TrainingGoals">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_XPMJobs_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="XPMJobs" Type="Self.XPMJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="XPMJobs">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="frtModelStoreContainer">
+          <EntitySet Name="FinancialKPIsMonth" EntityType="Self.FinancialKPIsMonth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinancialKPIsWeek" EntityType="Self.FinancialKPIsWeek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leave" EntityType="Self.Leave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Months" EntityType="Self.Months" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PromiseCategories" EntityType="Self.PromiseCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promises" EntityType="Self.Promises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferralDivisions" EntityType="Self.ReferralDivisions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferralKPIs" EntityType="Self.ReferralKPIs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrainingGoals" EntityType="Self.TrainingGoals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weeks" EntityType="Self.Weeks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XPMJobs" EntityType="Self.XPMJobs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FinancialKPIsMonth_Months" Association="Self.FK_FinancialKPIsMonth_Months">
+            <End Role="Months" EntitySet="Months" />
+            <End Role="FinancialKPIsMonth" EntitySet="FinancialKPIsMonth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialKPIsMonth_People" Association="Self.FK_FinancialKPIsMonth_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="FinancialKPIsMonth" EntitySet="FinancialKPIsMonth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialKPIsWeek_People" Association="Self.FK_FinancialKPIsWeek_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="FinancialKPIsWeek" EntitySet="FinancialKPIsWeek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialKPIsWeek_Weeks" Association="Self.FK_FinancialKPIsWeek_Weeks">
+            <End Role="Weeks" EntitySet="Weeks" />
+            <End Role="FinancialKPIsWeek" EntitySet="FinancialKPIsWeek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leave_People" Association="Self.FK_Leave_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="Leave" EntitySet="Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Links_People" Association="Self.FK_Links_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="Links" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promises_People" Association="Self.FK_Promises_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="Promises" EntitySet="Promises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promises_PromiseCategories" Association="Self.FK_Promises_PromiseCategories">
+            <End Role="PromiseCategories" EntitySet="PromiseCategories" />
+            <End Role="Promises" EntitySet="Promises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promises_Weeks" Association="Self.FK_Promises_Weeks">
+            <End Role="Weeks" EntitySet="Weeks" />
+            <End Role="Promises" EntitySet="Promises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferralKPIs_People" Association="Self.FK_ReferralKPIs_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="ReferralKPIs" EntitySet="ReferralKPIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferralKPIs_ReferralDivisions" Association="Self.FK_ReferralKPIs_ReferralDivisions">
+            <End Role="ReferralDivisions" EntitySet="ReferralDivisions" />
+            <End Role="ReferralKPIs" EntitySet="ReferralKPIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainingGoals_People" Association="Self.FK_TrainingGoals_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="TrainingGoals" EntitySet="TrainingGoals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_XPMJobs_People" Association="Self.FK_XPMJobs_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="XPMJobs" EntitySet="XPMJobs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="frtModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="frtEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FinancialKPIsMonths" EntityType="frtModel.FinancialKPIsMonth" />
+          <EntitySet Name="FinancialKPIsWeeks" EntityType="frtModel.FinancialKPIsWeek" />
+          <EntitySet Name="Links" EntityType="frtModel.Link" />
+          <EntitySet Name="Months" EntityType="frtModel.Month" />
+          <EntitySet Name="People" EntityType="frtModel.Person" />
+          <EntitySet Name="PromiseCategories" EntityType="frtModel.PromiseCategory" />
+          <EntitySet Name="Promises" EntityType="frtModel.Promise" />
+          <EntitySet Name="TrainingGoals" EntityType="frtModel.TrainingGoal" />
+          <EntitySet Name="Weeks" EntityType="frtModel.Week" />
+          <AssociationSet Name="FK_FinancialKPIsMonth_Months" Association="frtModel.FK_FinancialKPIsMonth_Months">
+            <End Role="Months" EntitySet="Months" />
+            <End Role="FinancialKPIsMonth" EntitySet="FinancialKPIsMonths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialKPIsMonth_People" Association="frtModel.FK_FinancialKPIsMonth_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="FinancialKPIsMonth" EntitySet="FinancialKPIsMonths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialKPIsWeek_People" Association="frtModel.FK_FinancialKPIsWeek_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="FinancialKPIsWeek" EntitySet="FinancialKPIsWeeks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialKPIsWeek_Weeks" Association="frtModel.FK_FinancialKPIsWeek_Weeks">
+            <End Role="Weeks" EntitySet="Weeks" />
+            <End Role="FinancialKPIsWeek" EntitySet="FinancialKPIsWeeks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Links_People" Association="frtModel.FK_Links_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="Links" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promises_People" Association="frtModel.FK_Promises_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="Promises" EntitySet="Promises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainingGoals_People" Association="frtModel.FK_TrainingGoals_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="TrainingGoals" EntitySet="TrainingGoals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promises_PromiseCategories" Association="frtModel.FK_Promises_PromiseCategories">
+            <End Role="PromiseCategories" EntitySet="PromiseCategories" />
+            <End Role="Promises" EntitySet="Promises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promises_Weeks" Association="frtModel.FK_Promises_Weeks">
+            <End Role="Weeks" EntitySet="Weeks" />
+            <End Role="Promises" EntitySet="Promises" />
+          </AssociationSet>
+          <EntitySet Name="ReferralDivisions" EntityType="frtModel.ReferralDivision" />
+          <EntitySet Name="ReferralKPIs" EntityType="frtModel.ReferralKPI" />
+          <AssociationSet Name="FK_ReferralKPIs_People" Association="frtModel.FK_ReferralKPIs_People">
+            <End Role="Person" EntitySet="People" />
+            <End Role="ReferralKPI" EntitySet="ReferralKPIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferralKPIs_ReferralDivisions" Association="frtModel.FK_ReferralKPIs_ReferralDivisions">
+            <End Role="ReferralDivision" EntitySet="ReferralDivisions" />
+            <End Role="ReferralKPI" EntitySet="ReferralKPIs" />
+          </AssociationSet>
+          <EntitySet Name="XPMJobs" EntityType="frtModel.XPMJobs" />
+          <AssociationSet Name="FK_XPMJobs_People" Association="frtModel.FK_XPMJobs_People">
+            <End Role="Person" EntitySet="People" />
+            <End Role="XPMJob" EntitySet="XPMJobs" />
+          </AssociationSet>
+          <EntitySet Name="Leaves" EntityType="frtModel.Leave" />
+          <AssociationSet Name="FK_Leave_People" Association="frtModel.FK_Leave_People">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Leave" EntitySet="Leaves" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="FinancialKPIsMonth">
+          <Key>
+            <PropertyRef Name="KPIMonth" />
+            <PropertyRef Name="PersonCode" />
+          </Key>
+          <Property Name="KPIMonth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="true" />
+          <Property Name="TimesheetDollars" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TimesheetDollarsBudget" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InvoiceDollars" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InvoiceDollarsBudget" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WriteOffDollars" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WriteOffDollarsBudget" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WIPDollars" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WIPDollarsBudget" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Month" Relationship="frtModel.FK_FinancialKPIsMonth_Months" FromRole="FinancialKPIsMonth" ToRole="Months" />
+          <NavigationProperty Name="Person" Relationship="frtModel.FK_FinancialKPIsMonth_People" FromRole="FinancialKPIsMonth" ToRole="People" />
+        </EntityType>
+        <EntityType Name="FinancialKPIsWeek">
+          <Key>
+            <PropertyRef Name="KPIWeek" />
+            <PropertyRef Name="PersonCode" />
+          </Key>
+          <Property Name="KPIWeek" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="true" />
+          <Property Name="TimesheetDollars" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TimesheetDollarsBudget" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Person" Relationship="frtModel.FK_FinancialKPIsWeek_People" FromRole="FinancialKPIsWeek" ToRole="People" />
+          <NavigationProperty Name="Week" Relationship="frtModel.FK_FinancialKPIsWeek_Weeks" FromRole="FinancialKPIsWeek" ToRole="Weeks" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="LinkID" />
+          </Key>
+          <Property Name="LinkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="true" />
+          <Property Name="Caption" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="URL" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Person" Relationship="frtModel.FK_Links_People" FromRole="Links" ToRole="People" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="MonthCommencing" />
+          </Key>
+          <Property Name="MonthCommencing" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FinancialKPIsMonths" Relationship="frtModel.FK_FinancialKPIsMonth_Months" FromRole="Months" ToRole="FinancialKPIsMonth" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonCode" />
+          </Key>
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="FinancialKPIsMonths" Relationship="frtModel.FK_FinancialKPIsMonth_People" FromRole="People" ToRole="FinancialKPIsMonth" />
+          <NavigationProperty Name="FinancialKPIsWeeks" Relationship="frtModel.FK_FinancialKPIsWeek_People" FromRole="People" ToRole="FinancialKPIsWeek" />
+          <NavigationProperty Name="Links" Relationship="frtModel.FK_Links_People" FromRole="People" ToRole="Links" />
+          <NavigationProperty Name="Promises" Relationship="frtModel.FK_Promises_People" FromRole="People" ToRole="Promises" />
+          <NavigationProperty Name="TrainingGoals" Relationship="frtModel.FK_TrainingGoals_People" FromRole="People" ToRole="TrainingGoals" />
+          <NavigationProperty Name="ReferralKPIs" Relationship="frtModel.FK_ReferralKPIs_People" FromRole="Person" ToRole="ReferralKPI" />
+          <Property Type="Boolean" Name="Hidden" Nullable="false" />
+          <NavigationProperty Name="XPMJobs" Relationship="frtModel.FK_XPMJobs_People" FromRole="Person" ToRole="XPMJob" />
+          <NavigationProperty Name="Leaves" Relationship="frtModel.FK_Leave_People" FromRole="Person" ToRole="Leave" />
+        </EntityType>
+        <EntityType Name="PromiseCategory">
+          <Key>
+            <PropertyRef Name="PromiseCategoryID" />
+          </Key>
+          <Property Name="PromiseCategoryID" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="Description" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Promises" Relationship="frtModel.FK_Promises_PromiseCategories" FromRole="PromiseCategories" ToRole="Promises" />
+          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Promise">
+          <Key>
+            <PropertyRef Name="PromiseID" />
+          </Key>
+          <Property Name="PromiseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="true" />
+          <Property Name="PromiseWeek" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PromiseCategory" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="PromiseDescription" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Person" Relationship="frtModel.FK_Promises_People" FromRole="Promises" ToRole="People" />
+          <NavigationProperty Name="PromiseCategory1" Relationship="frtModel.FK_Promises_PromiseCategories" FromRole="Promises" ToRole="PromiseCategories" />
+          <NavigationProperty Name="Week" Relationship="frtModel.FK_Promises_Weeks" FromRole="Promises" ToRole="Weeks" />
+          <Property Type="Boolean" Name="PromiseComplete" DefaultValue="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrainingGoal">
+          <Key>
+            <PropertyRef Name="GoalID" />
+          </Key>
+          <Property Name="GoalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="6" Unicode="true" FixedLength="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Goal" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Person" Relationship="frtModel.FK_TrainingGoals_People" FromRole="TrainingGoals" ToRole="People" />
+          <Property Type="String" Name="URL" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Week">
+          <Key>
+            <PropertyRef Name="WeekCommencing" />
+          </Key>
+          <Property Name="WeekCommencing" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FinancialKPIsWeeks" Relationship="frtModel.FK_FinancialKPIsWeek_Weeks" FromRole="Weeks" ToRole="FinancialKPIsWeek" />
+          <NavigationProperty Name="Promises" Relationship="frtModel.FK_Promises_Weeks" FromRole="Weeks" ToRole="Promises" />
+        </EntityType>
+        <Association Name="FK_FinancialKPIsMonth_Months">
+          <End Role="Months" Type="frtModel.Month" Multiplicity="1" />
+          <End Role="FinancialKPIsMonth" Type="frtModel.FinancialKPIsMonth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Months">
+              <PropertyRef Name="MonthCommencing" />
+            </Principal>
+            <Dependent Role="FinancialKPIsMonth">
+              <PropertyRef Name="KPIMonth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinancialKPIsMonth_People">
+          <End Role="People" Type="frtModel.Person" Multiplicity="1" />
+          <End Role="FinancialKPIsMonth" Type="frtModel.FinancialKPIsMonth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="FinancialKPIsMonth">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinancialKPIsWeek_People">
+          <End Role="People" Type="frtModel.Person" Multiplicity="1" />
+          <End Role="FinancialKPIsWeek" Type="frtModel.FinancialKPIsWeek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="FinancialKPIsWeek">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinancialKPIsWeek_Weeks">
+          <End Role="Weeks" Type="frtModel.Week" Multiplicity="1" />
+          <End Role="FinancialKPIsWeek" Type="frtModel.FinancialKPIsWeek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weeks">
+              <PropertyRef Name="WeekCommencing" />
+            </Principal>
+            <Dependent Role="FinancialKPIsWeek">
+              <PropertyRef Name="KPIWeek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Links_People">
+          <End Role="People" Type="frtModel.Person" Multiplicity="1" />
+          <End Role="Links" Type="frtModel.Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="Links">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promises_People">
+          <End Role="People" Type="frtModel.Person" Multiplicity="1" />
+          <End Role="Promises" Type="frtModel.Promise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="Promises">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrainingGoals_People">
+          <End Role="People" Type="frtModel.Person" Multiplicity="1" />
+          <End Role="TrainingGoals" Type="frtModel.TrainingGoal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="TrainingGoals">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promises_PromiseCategories">
+          <End Role="PromiseCategories" Type="frtModel.PromiseCategory" Multiplicity="1" />
+          <End Role="Promises" Type="frtModel.Promise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromiseCategories">
+              <PropertyRef Name="PromiseCategoryID" />
+            </Principal>
+            <Dependent Role="Promises">
+              <PropertyRef Name="PromiseCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promises_Weeks">
+          <End Role="Weeks" Type="frtModel.Week" Multiplicity="1" />
+          <End Role="Promises" Type="frtModel.Promise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weeks">
+              <PropertyRef Name="WeekCommencing" />
+            </Principal>
+            <Dependent Role="Promises">
+              <PropertyRef Name="PromiseWeek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ReferralDivision">
+          <Key>
+            <PropertyRef Name="Division" />
+          </Key>
+          <Property Type="String" Name="Division" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ReferralKPIs" Relationship="frtModel.FK_ReferralKPIs_ReferralDivisions" FromRole="ReferralDivision" ToRole="ReferralKPI" />
+        </EntityType>
+        <EntityType Name="ReferralKPI">
+          <Key>
+            <PropertyRef Name="PersonCode" />
+            <PropertyRef Name="Division" />
+          </Key>
+          <Property Type="String" Name="PersonCode" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Division" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="frtModel.FK_ReferralKPIs_People" FromRole="ReferralKPI" ToRole="Person" />
+          <NavigationProperty Name="ReferralDivision" Relationship="frtModel.FK_ReferralKPIs_ReferralDivisions" FromRole="ReferralKPI" ToRole="ReferralDivision" />
+          <Property Type="Decimal" Name="ReferralDollars" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="ReferralDollarsBudget" Precision="19" Scale="4" />
+        </EntityType>
+        <Association Name="FK_ReferralKPIs_People">
+          <End Type="frtModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="frtModel.ReferralKPI" Role="ReferralKPI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="ReferralKPI">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferralKPIs_ReferralDivisions">
+          <End Type="frtModel.ReferralDivision" Role="ReferralDivision" Multiplicity="1" />
+          <End Type="frtModel.ReferralKPI" Role="ReferralKPI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferralDivision">
+              <PropertyRef Name="Division" />
+            </Principal>
+            <Dependent Role="ReferralKPI">
+              <PropertyRef Name="Division" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="XPMJobs">
+          <Key>
+            <PropertyRef Name="XpmJobId" />
+          </Key>
+          <Property Name="XpmJobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Caption" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="frtModel.FK_XPMJobs_People" FromRole="XPMJob" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_XPMJobs_People">
+          <End Type="frtModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="frtModel.XPMJobs" Role="XPMJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="XPMJob">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="LeaveId" />
+          </Key>
+          <Property Name="LeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Caption" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Person" Relationship="frtModel.FK_Leave_People" FromRole="Leave" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Leave_People">
+          <End Type="frtModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="frtModel.Leave" Role="Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonCode" />
+            </Principal>
+            <Dependent Role="Leave">
+              <PropertyRef Name="PersonCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="frtModelStoreContainer" CdmEntityContainer="frtEntities">
+          <EntitySetMapping Name="FinancialKPIsMonths"><EntityTypeMapping TypeName="frtModel.FinancialKPIsMonth"><MappingFragment StoreEntitySet="FinancialKPIsMonth">
+            <ScalarProperty Name="KPIMonth" ColumnName="KPIMonth" />
+            <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+            <ScalarProperty Name="TimesheetDollars" ColumnName="TimesheetDollars" />
+            <ScalarProperty Name="TimesheetDollarsBudget" ColumnName="TimesheetDollarsBudget" />
+            <ScalarProperty Name="InvoiceDollars" ColumnName="InvoiceDollars" />
+            <ScalarProperty Name="InvoiceDollarsBudget" ColumnName="InvoiceDollarsBudget" />
+            <ScalarProperty Name="WriteOffDollars" ColumnName="WriteOffDollars" />
+            <ScalarProperty Name="WriteOffDollarsBudget" ColumnName="WriteOffDollarsBudget" />
+            <ScalarProperty Name="WIPDollars" ColumnName="WIPDollars" />
+            <ScalarProperty Name="WIPDollarsBudget" ColumnName="WIPDollarsBudget" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="FinancialKPIsWeeks"><EntityTypeMapping TypeName="frtModel.FinancialKPIsWeek"><MappingFragment StoreEntitySet="FinancialKPIsWeek">
+            <ScalarProperty Name="KPIWeek" ColumnName="KPIWeek" />
+            <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+            <ScalarProperty Name="TimesheetDollars" ColumnName="TimesheetDollars" />
+            <ScalarProperty Name="TimesheetDollarsBudget" ColumnName="TimesheetDollarsBudget" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Links"><EntityTypeMapping TypeName="frtModel.Link"><MappingFragment StoreEntitySet="Links">
+            <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+            <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+            <ScalarProperty Name="Caption" ColumnName="Caption" />
+            <ScalarProperty Name="URL" ColumnName="URL" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Months"><EntityTypeMapping TypeName="frtModel.Month"><MappingFragment StoreEntitySet="Months">
+            <ScalarProperty Name="MonthCommencing" ColumnName="MonthCommencing" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="People"><EntityTypeMapping TypeName="frtModel.Person"><MappingFragment StoreEntitySet="People">
+            <ScalarProperty Name="Hidden" ColumnName="Hidden" />
+                <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PromiseCategories"><EntityTypeMapping TypeName="frtModel.PromiseCategory"><MappingFragment StoreEntitySet="PromiseCategories">
+            <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PromiseCategoryID" ColumnName="PromiseCategory" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Promises"><EntityTypeMapping TypeName="frtModel.Promise"><MappingFragment StoreEntitySet="Promises">
+            <ScalarProperty Name="PromiseComplete" ColumnName="PromiseComplete" />
+                <ScalarProperty Name="PromiseID" ColumnName="PromiseID" />
+            <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+            <ScalarProperty Name="PromiseWeek" ColumnName="PromiseWeek" />
+            <ScalarProperty Name="PromiseCategory" ColumnName="PromiseCategory" />
+            <ScalarProperty Name="PromiseDescription" ColumnName="PromiseDescription" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TrainingGoals"><EntityTypeMapping TypeName="frtModel.TrainingGoal"><MappingFragment StoreEntitySet="TrainingGoals">
+            <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="GoalID" ColumnName="GoalID" />
+            <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="Goal" ColumnName="Goal" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Weeks"><EntityTypeMapping TypeName="frtModel.Week"><MappingFragment StoreEntitySet="Weeks">
+            <ScalarProperty Name="WeekCommencing" ColumnName="WeekCommencing" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ReferralDivisions">
+            <EntityTypeMapping TypeName="frtModel.ReferralDivision">
+              <MappingFragment StoreEntitySet="ReferralDivisions">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferralKPIs">
+            <EntityTypeMapping TypeName="frtModel.ReferralKPI">
+              <MappingFragment StoreEntitySet="ReferralKPIs">
+                <ScalarProperty Name="ReferralDollarsBudget" ColumnName="ReferralDollarsBudget" />
+                <ScalarProperty Name="ReferralDollars" ColumnName="ReferralDollars" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XPMJobs">
+            <EntityTypeMapping TypeName="frtModel.XPMJobs">
+              <MappingFragment StoreEntitySet="XPMJobs">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+                <ScalarProperty Name="XpmJobId" ColumnName="XpmJobId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leaves">
+            <EntityTypeMapping TypeName="frtModel.Leave">
+              <MappingFragment StoreEntitySet="Leave">
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+                <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="FRTdb EDM" ZoomLevel="73">
+        <EntityTypeShape EntityType="frtModel.FinancialKPIsMonth" Width="1.5" PointX="4.75" PointY="7.375" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="frtModel.FinancialKPIsWeek" Width="1.5" PointX="7.125" PointY="8" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="frtModel.Link" Width="1.5" PointX="2.875" PointY="10.625" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="frtModel.Month" Width="1.5" PointX="0.75" PointY="11.375" Height="1.4033821614583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="frtModel.Person" Width="1.5" PointX="2.75" PointY="7.375" Height="2.3648893229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="frtModel.PromiseCategory" Width="1.5" PointX="0.75" PointY="3.125" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="frtModel.Promise" Width="1.5" PointX="3" PointY="3.75" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="frtModel.TrainingGoal" Width="1.5" PointX="7.25" PointY="10.625" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="frtModel.Week" Width="1.5" PointX="0.75" PointY="5.5" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="frtModel.FK_FinancialKPIsMonth_Months" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="12.076691080729166" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="12.076691080729166" />
+          <ConnectorPoint PointX="2.7395833333333335" PointY="12.076691080729166" />
+          <ConnectorPoint PointX="3.75" PointY="12.076691080729166" />
+          <ConnectorPoint PointX="3.75" PointY="10.701396484375" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_FinancialKPIsMonth_People" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="9.0436990301415854" />
+          <ConnectorPoint PointX="2.6041666666666665" PointY="9.0436990301415854" />
+          <ConnectorPoint PointX="2.7708333333333335" PointY="9.0436990301415854" />
+          <ConnectorPoint PointX="3" PointY="9.0436990301415854" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_FinancialKPIsWeek_People" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.4687480000000002" PointY="7.875" />
+          <ConnectorPoint PointX="1.4687480000000002" PointY="7.625" />
+          <ConnectorPoint PointX="1.776040666666667" PointY="7.6249999999999991" />
+          <ConnectorPoint PointX="1.9427073333333336" PointY="7.625" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="7.6249999999999991" />
+          <ConnectorPoint PointX="2.5833333333333335" PointY="7.625" />
+          <ConnectorPoint PointX="2.6875" PointY="7.625" />
+          <ConnectorPoint PointX="2.6875" PointY="10.951396484375" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="10.951396484375" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="10.951396484375" />
+          <ConnectorPoint PointX="5.625" PointY="10.951396484375" />
+          <ConnectorPoint PointX="5.625" PointY="9.0862939453125" />
+          <ConnectorPoint PointX="6" PointY="9.0862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_FinancialKPIsWeek_Weeks" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.297841796875" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="6.2978417968749989" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="6.297841796875" />
+          <ConnectorPoint PointX="2.75" PointY="6.297841796875" />
+          <ConnectorPoint PointX="2.75" PointY="6.5571907552083317" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="6.5571907552083308" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="6.5571907552083317" />
+          <ConnectorPoint PointX="5.541666666666667" PointY="6.5571907552083308" />
+          <ConnectorPoint PointX="5.708333333333333" PointY="6.5571907552083317" />
+          <ConnectorPoint PointX="5.75" PointY="6.5571907552083317" />
+          <ConnectorPoint PointX="5.75" PointY="7.547587890625" />
+          <ConnectorPoint PointX="6.75" PointY="7.547587890625" />
+          <ConnectorPoint PointX="6.75" PointY="8" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_Links_People" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.406805139823717" />
+          <ConnectorPoint PointX="2.65625" PointY="10.813055139823717" />
+          <ConnectorPoint PointX="2.65625" PointY="14.740143229166666" />
+          <ConnectorPoint PointX="3" PointY="14.740143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_Promises_People" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="7.875" />
+          <ConnectorPoint PointX="2.625" PointY="7.5" />
+          <ConnectorPoint PointX="2.625" PointY="5.3459196549479175" />
+          <ConnectorPoint PointX="3" PointY="5.3459196549479175" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_TrainingGoals_People" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2257692307692323" PointY="10.432190755208334" />
+          <ConnectorPoint PointX="2.625" PointY="10.8314215244391" />
+          <ConnectorPoint PointX="2.625" PointY="20.740143229166666" />
+          <ConnectorPoint PointX="3" PointY="20.740143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_Promises_PromiseCategories" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.235341796875" />
+          <ConnectorPoint PointX="3" PointY="4.235341796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_Promises_Weeks" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.9035953776041659" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="5.903595377604165" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="5.9035953776041659" />
+          <ConnectorPoint PointX="3" PointY="5.9035953776041659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="frtModel.ReferralDivision" Width="1.5" PointX="6.375" PointY="1.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="frtModel.ReferralKPI" Width="1.5" PointX="6" PointY="5.125" Height="2.1725878906249996" />
+        <AssociationConnector Association="frtModel.FK_ReferralKPIs_People" >
+          <ConnectorPoint PointX="1.8593740000000003" PointY="7.875" />
+          <ConnectorPoint PointX="1.8593740000000003" PointY="7.34568359375" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="7.3456835937499987" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="7.34568359375" />
+          <ConnectorPoint PointX="2.875" PointY="7.34568359375" />
+          <ConnectorPoint PointX="2.875" PointY="6.8071907552083317" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="6.8071907552083308" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="6.8071907552083317" />
+          <ConnectorPoint PointX="5.625" PointY="6.8071907552083317" />
+          <ConnectorPoint PointX="5.625" PointY="5.8410958776041664" />
+          <ConnectorPoint PointX="6" PointY="5.8410958776041664" />
+        </AssociationConnector>
+        <AssociationConnector Association="frtModel.FK_ReferralKPIs_ReferralDivisions" >
+          <ConnectorPoint PointX="4.90625" PointY="2.9706835937499996" />
+          <ConnectorPoint PointX="4.90625" PointY="7.0523893229166656" />
+          <ConnectorPoint PointX="5.666666666666667" PointY="7.0523893229166648" />
+          <ConnectorPoint PointX="5.833333333333333" PointY="7.0523893229166656" />
+          <ConnectorPoint PointX="6" PointY="7.0523893229166656" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="frtModel.XPMJobs" Width="1.5" PointX="0.5" PointY="7.375" />
+        <AssociationConnector Association="frtModel.FK_XPMJobs_People" />
+        <EntityTypeShape EntityType="frtModel.Leave" Width="1.5" PointX="4.75" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="frtModel.FK_Leave_People" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
